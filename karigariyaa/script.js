@@ -16,19 +16,41 @@ document.addEventListener('click', function (e) {
 });
 
 // ---- Order Modal (3-step) ----
-var _orderProduct = '', _orderPrice = '', _orderAmount = 0;
+var _orderProduct = '', _orderPrice = '', _orderAmount = 0, _selectedSize = '';
 
 function openPayment(name, price, amount) {
   _orderProduct = name;
   _orderPrice   = price;
   _orderAmount  = amount;
+  _selectedSize = '';
   document.getElementById('modalProductName').textContent = name;
   document.getElementById('modalProductPrice').textContent = price;
   document.getElementById('orderForm').reset();
   document.getElementById('formError').style.display = 'none';
+  document.getElementById('sizeError').style.display = 'none';
+  document.querySelectorAll('.size-btn').forEach(function (b) { b.classList.remove('selected'); });
   goToStep(1);
   document.getElementById('paymentModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+// ---- Size Selection ----
+function selectSize(btn, size) {
+  document.querySelectorAll('.size-btn').forEach(function (b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  _selectedSize = size;
+  document.getElementById('sizeError').style.display = 'none';
+}
+
+// ---- Size Chart Modal ----
+function openSizeChart() {
+  document.getElementById('sizeChartModal').classList.add('open');
+}
+function closeSizeChart() {
+  document.getElementById('sizeChartModal').classList.remove('open');
+}
+function handleSizeChartClick(e) {
+  if (e.target === document.getElementById('sizeChartModal')) closeSizeChart();
 }
 
 function goToStep(n) {
@@ -43,16 +65,22 @@ function goToStep(n) {
 
 function proceedToPayment(e) {
   e.preventDefault();
+  var color   = document.getElementById('custColor').value.trim();
   var name    = document.getElementById('custName').value.trim();
   var phone   = document.getElementById('custPhone').value.trim();
   var address = document.getElementById('custAddress').value.trim();
   var city    = document.getElementById('custCity').value.trim();
   var state   = document.getElementById('custState').value.trim();
   var pin     = document.getElementById('custPin').value.trim();
-  if (!name || !phone || !address || !city || !state || pin.length < 6) {
+  if (!_selectedSize) {
+    document.getElementById('sizeError').style.display = 'block';
+    return;
+  }
+  if (!color || !name || !phone || !address || !city || !state || pin.length < 6) {
     document.getElementById('formError').style.display = 'block';
     return;
   }
+  document.getElementById('sizeError').style.display = 'none';
   document.getElementById('formError').style.display = 'none';
   // Build QR with amount
   var upiData = 'upi://pay?pa=9303266338@kotak&pn=KARIGARIYAA&am=' + _orderAmount + '&tn=' + encodeURIComponent(_orderProduct);
@@ -62,6 +90,7 @@ function proceedToPayment(e) {
 }
 
 function confirmOrder() {
+  var color   = document.getElementById('custColor').value.trim();
   var name    = document.getElementById('custName').value.trim();
   var phone   = document.getElementById('custPhone').value.trim();
   var email   = document.getElementById('custEmail').value.trim();
@@ -73,13 +102,17 @@ function confirmOrder() {
 
   document.getElementById('confirmProduct').textContent = _orderProduct;
   document.getElementById('confirmPrice').textContent   = _orderPrice;
+  document.getElementById('confirmSize').textContent    = _selectedSize;
+  document.getElementById('confirmColor').textContent   = color;
   document.getElementById('confirmName').textContent    = name;
   document.getElementById('confirmPhone').textContent   = phone;
   document.getElementById('confirmAddr').textContent    = fullAddr;
 
   var msg = '🛍️ *New Order – KARIGARIYAA*\n\n'
     + '*Product:* ' + _orderProduct + '\n'
-    + '*Amount:* ' + _orderPrice + '\n\n'
+    + '*Amount:* ' + _orderPrice + '\n'
+    + '*Size:* ' + _selectedSize + '\n'
+    + '*Color:* ' + color + '\n\n'
     + '*Customer Details:*\n'
     + 'Name: ' + name + '\n'
     + 'Phone: ' + phone + '\n'
@@ -118,7 +151,10 @@ function copyText(text, btn) {
 }
 
 document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') closePayment();
+  if (e.key === 'Escape') {
+    closeSizeChart();
+    closePayment();
+  }
 });
 
 // ---- Section Collapse / Expand ----
@@ -172,6 +208,61 @@ function handleSubscribe(e) {
   thanks.style.display = 'block';
   input.value = '';
   setTimeout(function () { thanks.style.display = 'none'; }, 4000);
+}
+
+// ---- Image Carousel ----
+function _carouselSet(container, idx) {
+  var imgs = container.querySelectorAll('img');
+  var dots = container.querySelectorAll('.carousel-dot');
+  var cur  = parseInt(container.dataset.index) || 0;
+  imgs[cur].classList.remove('active');
+  if (dots[cur]) dots[cur].classList.remove('active');
+  imgs[idx].classList.add('active');
+  if (dots[idx]) dots[idx].classList.add('active');
+  container.dataset.index = idx;
+}
+
+function carouselMove(btn, dir) {
+  var container = btn.closest('.product-image');
+  var total     = container.querySelectorAll('img').length;
+  var next      = ((parseInt(container.dataset.index) || 0) + dir + total) % total;
+  _carouselSet(container, next);
+}
+
+function carouselGoto(dot, idx) {
+  _carouselSet(dot.closest('.product-image'), idx);
+}
+
+// Touch-swipe support for carousels
+(function () {
+  var startX = 0;
+  document.addEventListener('touchstart', function (e) {
+    if (e.target.closest('.product-image')) startX = e.touches[0].clientX;
+  }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    var container = e.target.closest('.product-image');
+    if (!container) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) {
+      var total = container.querySelectorAll('img').length;
+      var next  = ((parseInt(container.dataset.index) || 0) + (dx < 0 ? 1 : -1) + total) % total;
+      _carouselSet(container, next);
+    }
+  }, { passive: true });
+}());
+
+// ---- Category Filter ----
+function filterCategory(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(function (b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(function (card) {
+    var show = cat === 'all' || card.dataset.category === cat;
+    card.style.display = show ? '' : 'none';
+    if (show) {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }
+  });
 }
 
 // ---- Scroll Reveal ----

@@ -65,14 +65,38 @@
     <button class="section-toggle" onclick="toggleSection(this)" aria-label="Toggle section"><span class="toggle-icon">−</span></button>
     <h2 class="section-title">Our Collections</h2>
     <div class="section-body">
+    <div class="category-filters">
+      <button class="cat-btn active" onclick="filterCategory('all', this)">All</button>
+      <button class="cat-btn" onclick="filterCategory('lehengas', this)">Lehengas</button>
+      <button class="cat-btn" onclick="filterCategory('saree-set', this)">Saree Set</button>
+      <button class="cat-btn" onclick="filterCategory('anarkali-set', this)">Anarkali Set</button>
+      <button class="cat-btn" onclick="filterCategory('shararas', this)">Shararas</button>
+      <button class="cat-btn" onclick="filterCategory('kurta-sets', this)">Kurta Sets</button>
+      <button class="cat-btn" onclick="filterCategory('co-ord-set', this)">Co-ord Set</button>
+      <button class="cat-btn" onclick="filterCategory('peplum-set', this)">Peplum-set</button>
+      <button class="cat-btn" onclick="filterCategory('jackets', this)">Jackets</button>
+    </div>
     <div class="products-grid">
 
-      <div class="product-card">
-        <div class="product-image">
-          <img src="images/image1.jpeg" alt="Luxury Bridal Lehenga Set I" />
+      <div class="product-card" data-category="lehengas">
+        <div class="product-image" data-index="0">
+          <img src="images/image1.jpeg" alt="Luxury Bridal Lehenga Set I" class="active img-full" />
+          <img src="images/image2.jpeg" alt="Luxury Bridal Lehenga Set I" />
+          <img src="images/image3.jpeg" alt="Luxury Bridal Lehenga Set I" />
+          <img src="images/image4.jpeg" alt="Luxury Bridal Lehenga Set I" />
+          <img src="images/image5.jpeg" alt="Luxury Bridal Lehenga Set I" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,4)"></button>
+          </div>
         </div>
         <div class="product-info">
-          <p class="product-category">Bridal Lehenga</p>
+          <p class="product-category">Lehengas</p>
           <h3 class="product-name">Luxury Bridal Lehenga Set I</h3>
           <p class="product-price">₹25,800</p>
           <p class="product-description">Exquisite bridal lehenga with intricate gold embroidery and rich fabric, perfect for the modern bride.</p>
@@ -80,12 +104,25 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
+      <div class="product-card" data-category="saree-set">
+        <div class="product-image" data-index="0">
+          <img src="images/image7.jpeg" alt="Artisan Saree Set I" class="active img-full" />
           <img src="images/image6.jpeg" alt="Artisan Saree Set I" />
+          <img src="images/image8.jpeg" alt="Artisan Saree Set I" />
+          <img src="images/image9.jpeg" alt="Artisan Saree Set I" />
+          <img src="images/image10.png" alt="Artisan Saree Set I" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,4)"></button>
+          </div>
         </div>
         <div class="product-info">
-          <p class="product-category">Designer Saree</p>
+          <p class="product-category">Saree Set</p>
           <h3 class="product-name">Artisan Saree Set I</h3>
           <p class="product-price">₹18,000</p>
           <p class="product-description">Handcrafted designer saree with delicate embroidery and fine artisanal textiles for timeless elegance.</p>
@@ -93,12 +130,25 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
+      <div class="product-card" data-category="lehengas">
+        <div class="product-image" data-index="0">
+          <img src="images/image13.jpeg" alt="Luxury Bridal Lehenga Set II" class="active img-full" />
           <img src="images/image11.jpeg" alt="Luxury Bridal Lehenga Set II" />
+          <img src="images/image12.jpeg" alt="Luxury Bridal Lehenga Set II" />
+          <img src="images/image14.jpeg" alt="Luxury Bridal Lehenga Set II" />
+          <img src="images/image15.png" alt="Luxury Bridal Lehenga Set II" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,4)"></button>
+          </div>
         </div>
         <div class="product-info">
-          <p class="product-category">Bridal Lehenga</p>
+          <p class="product-category">Lehengas</p>
           <h3 class="product-name">Luxury Bridal Lehenga Set II</h3>
           <p class="product-price">₹25,500</p>
           <p class="product-description">Stunning bridal lehenga featuring traditional craftsmanship and timeless elegance for your special day.</p>
@@ -106,9 +156,20 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
+      <div class="product-card" data-category="anarkali-set">
+        <div class="product-image" data-index="0">
+          <img src="images/image17.jpeg" alt="Royal Anarkali Set I" class="active img-full" />
           <img src="images/image16.jpeg" alt="Royal Anarkali Set I" />
+          <img src="images/image18.jpeg" alt="Royal Anarkali Set I" />
+          <img src="images/image19.jpeg" alt="Royal Anarkali Set I" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+          </div>
         </div>
         <div class="product-info">
           <p class="product-category">Anarkali Set</p>
@@ -119,12 +180,23 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
+      <div class="product-card" data-category="kurta-sets">
+        <div class="product-image" data-index="0">
+          <img src="images/image21.jpeg" alt="Festive Kurta Set I" class="active img-full" />
           <img src="images/image20.jpeg" alt="Festive Kurta Set I" />
+          <img src="images/image22.jpeg" alt="Festive Kurta Set I" />
+          <img src="images/image23.jpeg" alt="Festive Kurta Set I" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+          </div>
         </div>
         <div class="product-info">
-          <p class="product-category">Festive Wear</p>
+          <p class="product-category">Kurta Sets</p>
           <h3 class="product-name">Festive Kurta Set I</h3>
           <p class="product-price">₹19,500</p>
           <p class="product-description">Elegant festive kurta with embroidered details, perfect for celebrations and special occasions.</p>
@@ -132,12 +204,23 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
+      <div class="product-card" data-category="kurta-sets">
+        <div class="product-image" data-index="0">
+          <img src="images/image27.jpeg" alt="Festive Kurta Set II" class="active img-full" />
           <img src="images/image24.jpeg" alt="Festive Kurta Set II" />
+          <img src="images/image25.jpeg" alt="Festive Kurta Set II" />
+          <img src="images/image26.jpeg" alt="Festive Kurta Set II" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+          </div>
         </div>
         <div class="product-info">
-          <p class="product-category">Festive Wear</p>
+          <p class="product-category">Kurta Sets</p>
           <h3 class="product-name">Festive Kurta Set II</h3>
           <p class="product-price">₹14,500</p>
           <p class="product-description">Beautiful festive kurta with colorful embellishments and a flattering contemporary cut.</p>
@@ -145,12 +228,23 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
-          <img src="images/image28.jpeg" alt="Artisan Saree Set II" />
+      <div class="product-card" data-category="saree-set">
+        <div class="product-image" data-index="0">
+          <img src="images/image28.jpeg" alt="Artisan Saree Set II" class="active img-full" />
+          <img src="images/image29.jpeg" alt="Artisan Saree Set II" />
+          <img src="images/image30.jpeg" alt="Artisan Saree Set II" />
+          <img src="images/image31.jpeg" alt="Artisan Saree Set II" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+          </div>
         </div>
         <div class="product-info">
-          <p class="product-category">Designer Saree</p>
+          <p class="product-category">Saree Set</p>
           <h3 class="product-name">Artisan Saree Set II</h3>
           <p class="product-price">₹16,500</p>
           <p class="product-description">Premium designer saree with intricate handwork and luxurious fabric selection from master weavers.</p>
@@ -158,12 +252,25 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
+      <div class="product-card" data-category="lehengas">
+        <div class="product-image" data-index="0">
+          <img src="images/image33.jpeg" alt="Luxury Bridal Lehenga Set III" class="active img-full" />
           <img src="images/image32.jpeg" alt="Luxury Bridal Lehenga Set III" />
+          <img src="images/image34.jpeg" alt="Luxury Bridal Lehenga Set III" />
+          <img src="images/image35.jpeg" alt="Luxury Bridal Lehenga Set III" />
+          <img src="images/image36.png" alt="Luxury Bridal Lehenga Set III" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,4)"></button>
+          </div>
         </div>
         <div class="product-info">
-          <p class="product-category">Bridal Lehenga</p>
+          <p class="product-category">Lehengas</p>
           <h3 class="product-name">Luxury Bridal Lehenga Set III</h3>
           <p class="product-price">₹18,800</p>
           <p class="product-description">Grand bridal lehenga combining traditional craftsmanship with a modern sensibility and fine embroidery.</p>
@@ -171,9 +278,20 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
-          <img src="images/image37.jpeg" alt="Royal Anarkali Set II" />
+      <div class="product-card" data-category="anarkali-set">
+        <div class="product-image" data-index="0">
+          <img src="images/image37.jpeg" alt="Royal Anarkali Set II" class="active img-full" />
+          <img src="images/image38.jpeg" alt="Royal Anarkali Set II" />
+          <img src="images/image39.jpeg" alt="Royal Anarkali Set II" />
+          <img src="images/image40.jpeg" alt="Royal Anarkali Set II" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+          </div>
         </div>
         <div class="product-info">
           <p class="product-category">Anarkali Set</p>
@@ -184,12 +302,23 @@
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
+      <div class="product-card" data-category="saree-set">
+        <div class="product-image" data-index="0">
+          <img src="images/image43.jpeg" alt="Artisan Saree Set III" class="active img-full" />
           <img src="images/image41.jpeg" alt="Artisan Saree Set III" />
+          <img src="images/image42.jpeg" alt="Artisan Saree Set III" />
+          <img src="images/image44.jpeg" alt="Artisan Saree Set III" />
+          <button class="carousel-btn carousel-prev" onclick="carouselMove(this,-1)">&#8249;</button>
+          <button class="carousel-btn carousel-next" onclick="carouselMove(this,1)">&#8250;</button>
+          <div class="carousel-dots">
+            <button class="carousel-dot active" onclick="carouselGoto(this,0)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,1)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,2)"></button>
+            <button class="carousel-dot" onclick="carouselGoto(this,3)"></button>
+          </div>
         </div>
         <div class="product-info">
-          <p class="product-category">Designer Saree</p>
+          <p class="product-category">Saree Set</p>
           <h3 class="product-name">Artisan Saree Set III</h3>
           <p class="product-price">₹29,500</p>
           <p class="product-description">Exquisite premium saree with sophisticated embellishments crafted from the finest handpicked fabric.</p>
@@ -222,6 +351,31 @@
       <!-- ── STEP 1 : Address / Customer Details ── -->
       <div id="orderStep1">
         <form id="orderForm" onsubmit="proceedToPayment(event)" novalidate>
+
+          <!-- Size Selection -->
+          <div class="order-size-section">
+            <div class="size-header">
+              <span class="size-label">SIZE</span>
+              <button type="button" class="size-chart-link" onclick="openSizeChart()">&#x1F4CF; Size Chart</button>
+            </div>
+            <div class="size-options" id="sizeOptions">
+              <button type="button" class="size-btn" onclick="selectSize(this,'XS')">XS</button>
+              <button type="button" class="size-btn" onclick="selectSize(this,'S')">S</button>
+              <button type="button" class="size-btn" onclick="selectSize(this,'M')">M</button>
+              <button type="button" class="size-btn" onclick="selectSize(this,'L')">L</button>
+              <button type="button" class="size-btn" onclick="selectSize(this,'XL')">XL</button>
+              <button type="button" class="size-btn" onclick="selectSize(this,'XXL')">XXL</button>
+              <button type="button" class="size-btn" onclick="selectSize(this,'Custom')">Custom</button>
+            </div>
+            <div id="sizeError" class="form-error" style="display:none">Please select a size.</div>
+          </div>
+
+          <!-- Color Preference -->
+          <div class="form-group">
+            <label class="form-label">Color Preference <span class="req">*</span></label>
+            <input class="form-input" type="text" id="custColor" placeholder="e.g. Red, Navy Blue, Rose Gold..." required />
+          </div>
+
           <div class="form-row-2">
             <div class="form-group">
               <label class="form-label">Full Name <span class="req">*</span></label>
@@ -323,6 +477,8 @@
           <div class="order-summary-box">
             <div class="summary-row"><span class="sum-key">Product</span><span class="sum-val" id="confirmProduct"></span></div>
             <div class="summary-row"><span class="sum-key">Amount</span><span class="sum-val" id="confirmPrice"></span></div>
+            <div class="summary-row"><span class="sum-key">Size</span><span class="sum-val" id="confirmSize"></span></div>
+            <div class="summary-row"><span class="sum-key">Color</span><span class="sum-val" id="confirmColor"></span></div>
             <div class="summary-row"><span class="sum-key">Name</span><span class="sum-val" id="confirmName"></span></div>
             <div class="summary-row"><span class="sum-key">Phone</span><span class="sum-val" id="confirmPhone"></span></div>
             <div class="summary-row"><span class="sum-key">Address</span><span class="sum-val" id="confirmAddr"></span></div>
@@ -335,6 +491,41 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- SIZE CHART MODAL -->
+  <div class="modal-sizechart" id="sizeChartModal" onclick="handleSizeChartClick(event)">
+    <div class="modal-sizechart-content">
+      <button class="modal-payment-close" onclick="closeSizeChart()">&#10005;</button>
+      <h3 class="sizechart-title">PRODUCT MEASUREMENTS</h3>
+      <p class="sizechart-sub">(For ready-to-wear garments)</p>
+      <div class="sizechart-table-wrap">
+        <table class="sizechart-table">
+          <thead>
+            <tr>
+              <th rowspan="2">SIZE</th>
+              <th colspan="2">BUST</th>
+              <th colspan="2">WAIST</th>
+              <th colspan="2">HIPS</th>
+            </tr>
+            <tr>
+              <th>In</th><th>Cm</th>
+              <th>In</th><th>Cm</th>
+              <th>In</th><th>Cm</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>XS</td><td>32"</td><td>81.3</td><td>26"</td><td>66</td><td>36"</td><td>91.4</td></tr>
+            <tr><td>S</td><td>34"</td><td>86.4</td><td>28"</td><td>71.1</td><td>38"</td><td>96.5</td></tr>
+            <tr><td>M</td><td>36"</td><td>91.4</td><td>30"</td><td>76.2</td><td>40"</td><td>101.6</td></tr>
+            <tr><td>L</td><td>38"</td><td>96.5</td><td>32"</td><td>81.3</td><td>42"</td><td>106.7</td></tr>
+            <tr><td>XL</td><td>40"</td><td>101.6</td><td>34"</td><td>86.4</td><td>44"</td><td>111.8</td></tr>
+            <tr><td>XXL</td><td>42"</td><td>106.7</td><td>36"</td><td>91.4</td><td>46"</td><td>116.8</td></tr>
+            <tr><td>XXXL</td><td>44"</td><td>111.8</td><td>38"</td><td>96.5</td><td>48"</td><td>121.9</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
