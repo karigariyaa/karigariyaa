@@ -1,4 +1,4 @@
-// =============================================
+﻿// =============================================
 // KARIGARIYAA — Website JS
 // =============================================
 
@@ -166,7 +166,7 @@ function toggleSection(btn) {
     // Expand
     body.style.maxHeight = body.scrollHeight + 'px';
     body.classList.remove('collapsed');
-    icon.textContent = '−';
+    icon.textContent = '-';
     // Clear inline max-height after transition so the body can grow freely
     body.addEventListener('transitionend', function clearHeight() {
       body.style.maxHeight = '';
