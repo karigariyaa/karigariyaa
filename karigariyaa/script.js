@@ -1,5 +1,5 @@
 ﻿// =============================================
-// KARIGARIYAA — Website JS
+// KARIGARIYAA -- Website JS
 // =============================================
 
 // ---- Mobile Menu ----
@@ -108,7 +108,7 @@ function confirmOrder() {
   document.getElementById('confirmPhone').textContent   = phone;
   document.getElementById('confirmAddr').textContent    = fullAddr;
 
-  var msg = '🛍️ *New Order – KARIGARIYAA*\n\n'
+  var msg = '🛍️ *New Order - KARIGARIYAA*\n\n'
     + '*Product:* ' + _orderProduct + '\n'
     + '*Amount:* ' + _orderPrice + '\n'
     + '*Size:* ' + _selectedSize + '\n'
@@ -173,7 +173,7 @@ function toggleSection(btn) {
       body.removeEventListener('transitionend', clearHeight);
     });
   } else {
-    // Collapse — snapshot height first then animate to 0
+    // Collapse -- snapshot height first then animate to 0
     body.style.maxHeight = body.scrollHeight + 'px';
     body.offsetHeight; // force reflow
     body.style.maxHeight = '0px';

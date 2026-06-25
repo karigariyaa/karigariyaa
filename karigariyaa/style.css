@@ -1,5 +1,5 @@
-/* =============================================
-   KARIGARIYAA — Art of Luxury Wear
+﻿/* =============================================
+   KARIGARIYAA -- Art of Luxury Wear
    ============================================= */
 
 :root {
@@ -584,7 +584,7 @@ a  { text-decoration: none; color: inherit; }
 }
 .modal-apps strong { color: var(--charcoal); }
 
-/* Payment sections (no tabs — both visible) */
+/* Payment sections (no tabs -- both visible) */
 .pay-section {
   margin-bottom: 20px;
 }
@@ -1255,7 +1255,7 @@ a  { text-decoration: none; color: inherit; }
   position: relative;
 }
 .faq-list-inner li::before {
-  content: '—';
+  content: '--';
   position: absolute;
   left: 0;
   color: var(--gold);
@@ -1338,7 +1338,7 @@ a  { text-decoration: none; color: inherit; }
   position: relative;
 }
 .policy-list li::before {
-  content: '—';
+  content: '--';
   position: absolute;
   left: 0;
   color: var(--gold);
