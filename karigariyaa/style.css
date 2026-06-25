@@ -328,6 +328,7 @@ a  { text-decoration: none; color: inherit; }
   color: var(--charcoal);
   margin-bottom: 10px;
   line-height: 1.2;
+  min-height: 58px;
 }
 .product-price {
   font-size: 18px;
