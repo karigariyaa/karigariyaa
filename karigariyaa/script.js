@@ -192,6 +192,7 @@ function toggleSection(btn) {
     // Expand
     body.style.maxHeight = body.scrollHeight + 'px';
     body.classList.remove('collapsed');
+    btn.classList.remove('is-collapsed');
     icon.textContent = '-';
     // Clear inline max-height after transition so the body can grow freely
     body.addEventListener('transitionend', function clearHeight() {
@@ -204,6 +205,7 @@ function toggleSection(btn) {
     body.offsetHeight; // force reflow
     body.style.maxHeight = '0px';
     body.classList.add('collapsed');
+    btn.classList.add('is-collapsed');
     icon.textContent = '+';
   }
 }
