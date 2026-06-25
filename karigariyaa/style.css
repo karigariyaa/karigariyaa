@@ -299,6 +299,13 @@ a  { text-decoration: none; color: inherit; }
   transform: scale(1.25);
 }
 .product-info { padding: 25px; }
+.product-id {
+  font-size: 10px;
+  color: #b0a090;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
 .product-category {
   font-size: 12px;
   color: var(--gold);
