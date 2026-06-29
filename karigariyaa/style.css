@@ -1932,7 +1932,7 @@ a  { text-decoration: none; color: inherit; }
     padding-bottom: 4px;
   }
   .pd-thumb { width: 64px; height: 80px; }
-  .pd-main-img-wrap img { height: 380px; }
+  .pd-main-img-wrap img { width: 100%; height: auto; max-height: 80vh; object-fit: contain; background: var(--ivory); }
   .pd-info { max-height: none; padding: 20px 16px; }
   .pd-ymal-grid { grid-template-columns: repeat(2, 1fr); }
   .pd-close { top: 10px; right: 12px; }
