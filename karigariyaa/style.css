@@ -1768,6 +1768,25 @@ a  { text-decoration: none; color: inherit; }
 .pd-color-btn:hover { border-color: var(--charcoal); }
 .pd-color-btn.selected { border-color: var(--charcoal); background: var(--charcoal); color: #fff; }
 
+.pay-color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+.pay-color-btn {
+  padding: 7px 13px;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+  background: none;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.18s;
+  color: var(--charcoal);
+  font-family: var(--font-body);
+}
+.pay-color-btn:hover { border-color: var(--charcoal); }
+.pay-color-btn.selected { border-color: var(--charcoal); background: var(--charcoal); color: #fff; }
 .pd-selection-error {
   display: none;
   color: #c0392b;

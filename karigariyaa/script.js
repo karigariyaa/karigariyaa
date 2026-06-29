@@ -33,7 +33,7 @@ document.addEventListener('click', function (e) {
 var _orderProduct = '', _orderPrice = '', _orderAmount = 0, _selectedSize = '';
 var _isCartCheckout = false, _cartSnapshot = [];
 
-function openPayment(name, price, amount) {
+function openPayment(name, price, amount, colors, preSelectedColor) {
   _orderProduct = name;
   _orderPrice   = price;
   _orderAmount  = amount;
@@ -43,11 +43,39 @@ function openPayment(name, price, amount) {
   document.getElementById('orderForm').reset();
   document.getElementById('formError').style.display = 'none';
   document.getElementById('sizeError').style.display = 'none';
+  document.getElementById('colorError').style.display = 'none';
   document.querySelectorAll('.size-btn').forEach(function (b) { b.classList.remove('selected'); });
   document.getElementById('orderSizeSection').style.display = _isCartCheckout ? 'none' : '';
+
+  // Build color buttons
+  var colorOptions = document.getElementById('payColorOptions');
+  var hiddenColor  = document.getElementById('custColor');
+  hiddenColor.value = preSelectedColor || '';
+  if (colors && colors.length) {
+    colorOptions.innerHTML = colors.map(function(c) {
+      var sel = c === preSelectedColor ? ' selected' : '';
+      return '<button type="button" class="pay-color-btn' + sel + '" onclick="paySelectColor(this,\'' + c.replace(/'/g, '\\\'') + '\')">' + c + '</button>';
+    }).join('');
+  } else {
+    colorOptions.innerHTML = '<button type="button" class="pay-color-btn" onclick="paySelectColor(this,\'Custom\')">Custom</button>';
+  }
+
   goToStep(1);
   document.getElementById('paymentModal').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function paySelectColor(btn, color) {
+  document.querySelectorAll('.pay-color-btn').forEach(function(b) { b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  document.getElementById('custColor').value = color;
+  document.getElementById('colorError').style.display = 'none';
+}
+
+function buyNowFromCard(btn, name, price, amount) {
+  var card = btn.closest('.product-card');
+  var colors = card ? (card.getAttribute('data-colors') || 'Custom').split(',').map(function(c){ return c.trim(); }) : ['Custom'];
+  openPayment(name, price, amount, colors, null);
 }
 
 // ---- Size Selection ----
@@ -92,11 +120,16 @@ function proceedToPayment(e) {
     document.getElementById('sizeError').style.display = 'block';
     return;
   }
-  if (!color || !name || !phone || !address || !city || !state || pin.length < 6) {
+  if (!color) {
+    document.getElementById('colorError').style.display = 'block';
+    return;
+  }
+  if (!name || !phone || !address || !city || !state || pin.length < 6) {
     document.getElementById('formError').style.display = 'block';
     return;
   }
   document.getElementById('sizeError').style.display = 'none';
+  document.getElementById('colorError').style.display = 'none';
   document.getElementById('formError').style.display = 'none';
   // Build QR with amount
   var upiData = 'upi://pay?pa=9303266338@kotak&pn=KARIGARIYAA&am=' + _orderAmount + '&tn=' + encodeURIComponent(_orderProduct);
@@ -348,7 +381,7 @@ function openProductDetail(card) {
 
   var colors = (card.getAttribute('data-colors') || 'Customisable').split(',').map(function(c){ return c.trim(); });
 
-  _pdProduct = { name: name, id: id, cat: cat, price: price, amount: amount, desc: desc };
+  _pdProduct = { name: name, id: id, cat: cat, price: price, amount: amount, desc: desc, colors: card.getAttribute('data-colors') || 'Custom' };
   _pdSelectedSize  = '';
   _pdSelectedColor = '';
 
@@ -464,18 +497,13 @@ function pdValidateSelection() {
 function pdBuyNow() {
   if (!pdValidateSelection()) return;
   var p = _pdProduct;
-  openPayment(p.name, p.price, p.amount);
+  var colors = (p.colors || 'Custom').split(',').map(function(c){ return c.trim(); });
+  openPayment(p.name, p.price, p.amount, colors, _pdSelectedColor);
   if (_pdSelectedSize) {
     setTimeout(function () {
       document.querySelectorAll('.size-btn').forEach(function (b) {
         if (b.textContent.trim() === _pdSelectedSize) selectSize(b, _pdSelectedSize);
       });
-    }, 60);
-  }
-  if (_pdSelectedColor) {
-    setTimeout(function () {
-      var ci = document.getElementById('custColor');
-      if (ci) ci.value = _pdSelectedColor;
     }, 60);
   }
 }
