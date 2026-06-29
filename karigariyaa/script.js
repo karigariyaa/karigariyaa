@@ -2,6 +2,20 @@
 // KARIGARIYAA -- Website JS
 // =============================================
 
+// ---- Auto-hide header on scroll, reveal when still ----
+(function () {
+  var header = document.querySelector('.site-header');
+  var scrollTimer = null;
+
+  window.addEventListener('scroll', function () {
+    header.classList.add('nav-hidden');
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function () {
+      header.classList.remove('nav-hidden');
+    }, 800);
+  }, { passive: true });
+})();
+
 // ---- Mobile Menu ----
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('open');
@@ -330,7 +344,9 @@ function openProductDetail(card) {
   var cat  = card.querySelector('.product-category').textContent;
   var price = card.querySelector('.product-price').textContent;
   var amount = parseInt(price.replace(/[^0-9]/g, ''));
-  var desc = card.querySelector('.product-description').textContent;
+  var desc = card.querySelector('.product-description').innerHTML;
+
+  var colors = (card.getAttribute('data-colors') || 'Customisable').split(',').map(function(c){ return c.trim(); });
 
   _pdProduct = { name: name, id: id, cat: cat, price: price, amount: amount, desc: desc };
   _pdSelectedSize  = '';
@@ -340,11 +356,17 @@ function openProductDetail(card) {
   document.getElementById('pdName').textContent     = name;
   document.getElementById('pdIdTag').textContent    = id;
   document.getElementById('pdPrice').textContent    = price;
-  document.getElementById('pdDescBody').textContent = desc;
+  document.getElementById('pdDescBody').innerHTML = desc;
 
-  // Reset selections
-  document.querySelectorAll('.pd-size-btn').forEach(function (b) { b.classList.remove('selected'); });
-  document.querySelectorAll('.pd-color-btn').forEach(function (b) { b.classList.remove('selected'); });
+  // Build color buttons dynamically from product's data-colors
+  var colorOptionsEl = document.getElementById('pdColorOptions');
+  colorOptionsEl.innerHTML = colors.map(function(c) {
+    return '<button class="pd-color-btn" onclick="pdSelectColor(this,\'' + c.replace(/'/g, '\\\'') + '\')">' + c + '</button>';
+  }).join('');
+
+  // Reset selections and error state
+  document.getElementById('pdSelectionError').classList.remove('visible');
+  document.querySelectorAll('.pd-size-btn').forEach(function (b) { b.classList.remove('selected', 'required-highlight'); });
 
   // Description collapsed by default
   var descBody = document.getElementById('pdDescBody');
@@ -410,18 +432,37 @@ function buildYmal(currentCard) {
 }
 
 function pdSelectSize(btn, size) {
-  document.querySelectorAll('.pd-size-btn').forEach(function (b) { b.classList.remove('selected'); });
+  document.querySelectorAll('.pd-size-btn').forEach(function (b) { b.classList.remove('selected', 'required-highlight'); });
   btn.classList.add('selected');
   _pdSelectedSize = size;
+  if (_pdSelectedColor) document.getElementById('pdSelectionError').classList.remove('visible');
 }
 
 function pdSelectColor(btn, color) {
-  document.querySelectorAll('.pd-color-btn').forEach(function (b) { b.classList.remove('selected'); });
+  document.querySelectorAll('.pd-color-btn').forEach(function (b) { b.classList.remove('selected', 'required-highlight'); });
   btn.classList.add('selected');
   _pdSelectedColor = color;
+  if (_pdSelectedSize) document.getElementById('pdSelectionError').classList.remove('visible');
+}
+
+function pdValidateSelection() {
+  var errEl = document.getElementById('pdSelectionError');
+  var missing = [];
+  if (!_pdSelectedSize)  missing.push('Size');
+  if (!_pdSelectedColor) missing.push('Colour');
+  if (missing.length) {
+    errEl.textContent = 'Please select a ' + missing.join(' and ') + ' to continue.';
+    errEl.classList.add('visible');
+    if (!_pdSelectedSize)  document.querySelectorAll('.pd-size-btn').forEach(function(b){ b.classList.add('required-highlight'); });
+    if (!_pdSelectedColor) document.querySelectorAll('.pd-color-btn').forEach(function(b){ b.classList.add('required-highlight'); });
+    return false;
+  }
+  errEl.classList.remove('visible');
+  return true;
 }
 
 function pdBuyNow() {
+  if (!pdValidateSelection()) return;
   var p = _pdProduct;
   openPayment(p.name, p.price, p.amount);
   if (_pdSelectedSize) {
@@ -466,6 +507,7 @@ function closePdModal(e) {
 }
 
 function pdAddToCart() {
+  if (!pdValidateSelection()) return;
   var p = _pdProduct;
   cartAdd({
     name:   p.name,
